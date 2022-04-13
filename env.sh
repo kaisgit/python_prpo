@@ -1,0 +1,9 @@
+export PRPO_DB_HOST=10.0.1.130
+export PRPO_DB_NAME=
+export PRPO_DB_USERNAME=
+export PRPO_DB_PASSWORD=
+export PRPO_GPG_PR=
+export PRPO_GPG_PO=
+export PRPO2_DB_NAME=conveyor
+export PRPO2_DB_USERNAME=
+export PRPO2_DB_PASSWORD=

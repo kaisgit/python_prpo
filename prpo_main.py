@@ -1774,14 +1774,14 @@ def get_site_id(conn):
 ####################################################################################################
 def parse_aqid(aq_id):
     items = aq_id.split('-')
-    apple_equipment_id = items[0]
-    apple_equipment_version = items[1]
+    a_equipment_id = items[0]
+    a_equipment_version = items[1]
     if len(items) == 3:
-        apple_equipment_type = items[2]
+        a_equipment_type = items[2]
     elif len(items) == 2:
-        apple_equipment_type = ''
+        a_equipment_type = ''
 
-    return apple_equipment_id, apple_equipment_version, apple_equipment_type
+    return a_equipment_id, a_equipment_version, a_equipment_type
 
 ####################################################################################################
 # get equipment_id, equipment_db_id from aq_id
@@ -1791,16 +1791,16 @@ def get_equipment(conn, aq_id):
             SELECT
                 equipment_id,
                 db_id as equipment_db_id,
-                apple_equipment_id,
-                apple_equipment_version,
-                apple_equipment_type,
-                if(apple_equipment_id is null, '', concat(LPAD(apple_equipment_id,5,0),'-',LPAD(gh_bom_equipment.apple_equipment_version,2,0),if(ifnull(gh_bom_equipment.apple_equipment_type,'')='' ,'', concat('-', gh_bom_equipment.apple_equipment_type) ) )) as apple_equipment_uid
+                a_equipment_id,
+                a_equipment_version,
+                a_equipment_type,
+                if(a_equipment_id is null, '', concat(LPAD(a_equipment_id,5,0),'-',LPAD(gh_bom_equipment.a_equipment_version,2,0),if(ifnull(gh_bom_equipment.a_equipment_type,'')='' ,'', concat('-', gh_bom_equipment.a_equipment_type) ) )) as a_equipment_uid
             FROM
                 gh_bom_equipment
             WHERE
-                apple_equipment_id = %s
-                and apple_equipment_version = %s
-                and ifnull(apple_equipment_type,'') = %s"""
+                a_equipment_id = %s
+                and a_equipment_version = %s
+                and ifnull(a_equipment_type,'') = %s"""
 
     try:
         with conn.cursor() as cursor:
@@ -1973,10 +1973,10 @@ def send_email(invalid_recs, report_type, filename):
     </div>
     </div>
     <div style="width:1000;font-family:Lucida Grande, Geneva, Verdana, Arial, Helvetica, sans-serif; font-size:10px; color:rgb(121,121,121); line-height:10px;" align="center" >
-    <p>Apple Need to Know Confidential</p>
+    <p>Need to Know Confidential</p>
     <p>Radar : <a href="rdar://new/problem/component=GroundhogDS&version=All" style="font-weight:normal;text-decoration:none;color:#9BB3E4"> GroundhogDS POAutomation | ALL</a></p>
-    <p>Email : <a href="mailto:groundhogPOAutomation@group.apple.com" style="font-weight:normal;text-decoration:none;color:#9BB3E4" >ghDS PRPO Automation Support (groundhogPOAutomation@group.apple.com) </a></p>
-    <p>Wiki :<a href="http://hwtewiki.apple.com/display/ghds/Home" style="font-weight:normal;text-decoration:none;color:#9BB3E4">http://hwtewiki.apple.com/display/ghds/Home</a></p>
+    <p>Email : <a href="mailto:email@group.company.com" style="font-weight:normal;text-decoration:none;color:#9BB3E4" >ghDS PRPO Automation Support (email@group.company.com) </a></p>
+    <p>Wiki :<a href="http://localhost/display/ghds/Home" style="font-weight:normal;text-decoration:none;color:#9BB3E4">http://localhost/display/ghds/Home</a></p>
     </div>
     </center>
       </body>
@@ -1995,7 +1995,7 @@ def send_email(invalid_recs, report_type, filename):
     
     try:
         # Send the message via local SMTP server.
-        s = smtplib.SMTP('relay.apple.com')
+        s = smtplib.SMTP('relay.company.com')
         # sendmail function takes 3 arguments: sender's address, recipient's address and message to send - sent as one string.
         s.sendmail(from_addr, to_addr, msg.as_string())
     except Exception as emailerr:
@@ -2036,10 +2036,10 @@ def send_email_notification_on_errors():
     </div>
     </div>
     <div style="width:1000;font-family:Lucida Grande, Geneva, Verdana, Arial, Helvetica, sans-serif; font-size:10px; color:rgb(121,121,121); line-height:10px;" align="center" >
-    <p>Apple Need to Know Confidential</p>
+    <p>Need to Know Confidential</p>
     <p>Radar : <a href="rdar://new/problem/component=GroundhogDS&version=All" style="font-weight:normal;text-decoration:none;color:#9BB3E4"> GroundhogDS POAutomation | ALL</a></p>
-    <p>Email : <a href="mailto:groundhogPOAutomation@group.apple.com" style="font-weight:normal;text-decoration:none;color:#9BB3E4" >ghDS PRPO Automation Support (groundhogPOAutomation@group.apple.com) </a></p>
-    <p>Wiki :<a href="http://hwtewiki.apple.com/display/ghds/Home" style="font-weight:normal;text-decoration:none;color:#9BB3E4">http://hwtewiki.apple.com/display/ghds/Home</a></p>
+    <p>Email : <a href="mailto:email@group.company.com" style="font-weight:normal;text-decoration:none;color:#9BB3E4" >ghDS PRPO Automation Support (email@group.company.com) </a></p>
+    <p>Wiki :<a href="http://localhost/display/ghds/Home" style="font-weight:normal;text-decoration:none;color:#9BB3E4">http://localhost/display/ghds/Home</a></p>
     </div>
     </center>
       </body>
@@ -2058,7 +2058,7 @@ def send_email_notification_on_errors():
     
     try:
         # Send the message via local SMTP server.
-        s = smtplib.SMTP('relay.apple.com')
+        s = smtplib.SMTP('relay.company.com')
         # sendmail function takes 3 arguments: sender's address, recipient's address and message to send - sent as one string.
         s.sendmail(from_addr_err, to_addr_err, msg.as_string())
     except Exception as emailerr:
